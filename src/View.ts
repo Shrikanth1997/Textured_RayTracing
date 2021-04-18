@@ -52,7 +52,7 @@ export class View {
     //this.proj = mat4.perspective(this.proj, glMatrix.toRadian(60), 1, 0.1, 10000);
 
     //We must also specify "where" the above part of the virtual world will be shown on the actual canvas on screen. This part of the screen where the above drawing gets pasted is called the "viewport", which we set here. The origin of the viewport is left,bottom. In this case we want it to span the entire canvas, so we start at (0,0) with a width and height of 400 each (matching the dimensions of the canvas specified in HTML)
-    this.gl.viewport(0, 0, 400, 400);
+    this.gl.viewport(0, 0, 800, 800);
   }
 
   public getNumLights(): number {

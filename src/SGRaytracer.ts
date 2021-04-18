@@ -46,7 +46,7 @@ function main(): void {
             vec4.fromValues(0.9, 0.9, 0.7, 1));
 
 
-        ScenegraphJSONImporter.importJSON(new VertexPNTProducer(), createSphere())
+        ScenegraphJSONImporter.importJSON(new VertexPNTProducer(), createScene_2())
             .then((s: Scenegraph<VertexPNT>) => {
                 view.initScenegraph(s);
 
@@ -220,6 +220,425 @@ function createSphere(): string{
 `;
 
 }
+
+function createScene_2(): string{
+
+  return `
+  {
+  "scaleinstances": "false",
+  "instances": [
+      {
+      "name": "sphere",
+      "path": "models/sphere.obj"
+      },
+      {
+      "name": "box",
+      "path": "models/box.obj"
+      },
+      {
+      "name": "cylinder",
+      "path": "models/cylinder.obj"
+      },
+      {
+      "name": "cone",
+      "path": "models/cone.obj"
+      }
+  ],
+  "images": [
+      {
+      "name": "white",
+      "path": "textures/white.png"
+      }
+  ],
+  "root": {
+      "type": "group",
+      "name": "Root of scene graph",
+      "lights": [
+        {
+          "ambient": [
+            0.8,
+            0.8,
+            0.8
+          ],
+          "diffuse": [
+            0.8,
+            0.8,
+            0.8
+          ],
+          "specular": [
+            0.8,
+            0.8,
+            0.8
+          ],
+          "position": [
+            0.0,
+            100.0,
+            0.0,
+            1.0
+          ],
+          "spotdirection": [
+            0.0,
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "spotcutoff": 60
+        }
+      ],
+      "children": [
+          {
+              "type": "transform",
+              "transform": [
+                  {
+                      "translate": [
+                        0.0,
+                        0.0,
+                        30.0
+                      ]
+                  },
+                  {
+                      "scale": [
+                          90.0,
+                          90.0,
+                          90.0
+                      ]
+                  }
+              ],
+              "child": {
+                  "type": "object",
+                  "instanceof": "sphere",
+                  "material": {
+                      "ambient": [
+                          0.4,
+                          0.2,
+                          0.6,
+                          1.0
+                      ],
+                      "diffuse": [
+                          0.8,
+                          0.8,
+                          0.8,
+                          1.0
+                      ],
+                      "specular": [
+                          0.8,
+                          0.8,
+                          0.8,
+                          1.0
+                      ],
+                      "emission": [
+                          0.0,
+                          0.0,
+                          0.0,
+                          1.0
+                      ],
+                  "shininess": 100.0,
+                  "absorption": 1.0,
+                  "reflection": 0.0,
+                  "transparency": 0.0,
+                  "refractive_index": 0.0
+                  }
+              }
+          },
+          {
+              "type": "transform",
+              "transform": [
+                  {
+                      "translate": [
+                        0.0,
+                        -40.0,
+                        15.0
+                      ]
+                  },
+                  {
+                      "scale": [
+                          300,
+                          240,
+                          240
+                      ]
+                  }
+              ],
+              "child": {
+                  "type": "object",
+                  "instanceof": "box",
+                  "texture" : "white",
+                  "material": {
+                      "ambient": [
+                          0.8,
+                          0.2,
+                          0.3,
+                          1.0
+                      ],
+                      "diffuse": [
+                          0.8,
+                          0.8,
+                          0.8,
+                          1.0
+                      ],
+                      "specular": [
+                          0.8,
+                          0.8,
+                          0.8,
+                          1.0
+                      ],
+                      "emission": [
+                          0.0,
+                          0.0,
+                          0.0,
+                          1.0
+                      ],
+                  "shininess": 100.0,
+                  "absorption": 1.0,
+                  "reflection": 0.0,
+                  "transparency": 0.0,
+                  "refractive_index": 0.0
+                  }
+              }
+          },
+
+          {
+              "type": "transform",
+              "transform": [
+                  {
+                      "translate": [
+                        -10.0,
+                        -10.0,
+                        -10.0
+                      ]
+                  },
+                  {
+                      "scale": [
+                          30.0,
+                          30.0,
+                          30.0
+                      ]
+                  }
+              ],
+              "child": {
+                  "type": "object",
+                  "instanceof": "sphere",
+                  "material": {
+                      "ambient": [
+                          0.1,
+                          0.8,
+                          0.8,
+                          1.0
+                      ],
+                      "diffuse": [
+                          0.8,
+                          0.8,
+                          0.8,
+                          1.0
+                      ],
+                      "specular": [
+                          0.8,
+                          0.8,
+                          0.8,
+                          1.0
+                      ],
+                      "emission": [
+                          0.0,
+                          0.0,
+                          0.0,
+                          1.0
+                      ],
+                  "shininess": 100.0,
+                  "absorption": 1.0,
+                  "reflection": 0.0,
+                  "transparency": 0.0,
+                  "refractive_index": 0.0
+                  }
+              }
+          },
+
+
+          {
+              "type": "transform",
+              "transform": [
+                  {
+                      "translate": [
+                        -10.0,
+                        -5,
+                        10.0
+                      ]
+                  },
+                  {
+                      "scale": [
+                          60,
+                          60,
+                          60
+                      ]
+                  },
+                  {
+                      "rotate": [
+                          -10,
+                          1.0,
+                          0.0,
+                          0.0
+                      ]
+                  }
+              ],
+              "child": {
+                  "type": "object",
+                  "instanceof": "box",
+                  "texture" : "white",
+                  "material": {
+                      "ambient": [
+                          0.8,
+                          0.8,
+                          0.3,
+                          1.0
+                      ],
+                      "diffuse": [
+                          0.8,
+                          0.8,
+                          0.8,
+                          1.0
+                      ],
+                      "specular": [
+                          0.8,
+                          0.8,
+                          0.8,
+                          1.0
+                      ],
+                      "emission": [
+                          0.0,
+                          0.0,
+                          0.0,
+                          1.0
+                      ],
+                  "shininess": 100.0,
+                  "absorption": 1.0,
+                  "reflection": 0.0,
+                  "transparency": 0.0,
+                  "refractive_index": 0.0
+                  }
+              }
+          },
+
+
+          {
+              "type": "transform",
+              "transform": [
+                  {
+                      "translate": [
+                        10.0,
+                        -15,
+                        10.0
+                      ]
+                  },
+                  {
+                      "scale": [
+                          20,
+                          20,
+                          20
+                      ]
+                  }
+              ],
+              "child": {
+                  "type": "object",
+                  "instanceof": "sphere",
+                  "texture" : "white",
+                  "material": {
+                      "ambient": [
+                          0.2,
+                          0.8,
+                          0.2,
+                          1.0
+                      ],
+                      "diffuse": [
+                          0.8,
+                          0.8,
+                          0.8,
+                          1.0
+                      ],
+                      "specular": [
+                          0.8,
+                          0.8,
+                          0.8,
+                          1.0
+                      ],
+                      "emission": [
+                          0.0,
+                          0.0,
+                          0.0,
+                          1.0
+                      ],
+                  "shininess": 100.0,
+                  "absorption": 1.0,
+                  "reflection": 0.0,
+                  "transparency": 0.0,
+                  "refractive_index": 0.0
+                  }
+              }
+          },
+
+
+          {
+              "type": "transform",
+              "transform": [
+                  {
+                      "translate": [
+                        7.5,
+                        7.5,
+                        -15.0
+                      ]
+                  },
+                  {
+                      "scale": [
+                          30,
+                          30,
+                          30
+                      ]
+                  }
+              ],
+              "child": {
+                  "type": "object",
+                  "instanceof": "box",
+                  "texture" : "white",
+                  "material": {
+                      "ambient": [
+                          0.7,
+                          0.7,
+                          0.7,
+                          1.0
+                      ],
+                      "diffuse": [
+                          0.8,
+                          0.8,
+                          0.8,
+                          1.0
+                      ],
+                      "specular": [
+                          0.8,
+                          0.8,
+                          0.8,
+                          1.0
+                      ],
+                      "emission": [
+                          0.0,
+                          0.0,
+                          0.0,
+                          1.0
+                      ],
+                  "shininess": 100.0,
+                  "absorption": 1.0,
+                  "reflection": 0.0,
+                  "transparency": 0.0,
+                  "refractive_index": 0.0
+                  }
+              }
+          }
+      ]
+  }
+}
+`;
+
+}
+
+
+
+
 
 function scene(): string {
     return `{
