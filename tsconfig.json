@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "amd",
+        "moduleResolution": "node", //to make webgl-obj-loader work
+        "outDir": "out", //put transpiled JS files in this folder
+        "sourceMap": true, //generate source map for debugging (stepping through)
+        "baseUrl": "./src", //this is the base URL for all relative paths that follow
+        "paths": { //managing relative paths, only for Typescript compiling
+            "%COMMON/*": [ //this is the alias used in the Typescript code
+                "../../common/*" //this is what the alias means, relative to the Typescript file
+            ]
+        }
+    },
+    "include": [ //include all files in this folder for transpiling
+        "src/**/*"
+    ],
+    "exclude": [ //do not include files in these folders
+        "node_modules", //this is where NPM has installed all packages, don't bother transpiling
+        "**/*.spec.ts"
+    ],
+    "lib": [ //any libraries
+        "es2016",
+        "dom",
+        "es5"
+    ]
+}

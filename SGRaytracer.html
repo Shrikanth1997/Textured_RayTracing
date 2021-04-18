@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="out/webgl.jpg" />
+    <meta charset="utf-8" />
+    <!-- the script tag below links to the main js file. This js file will have the main function. We also require require.js to load in exported classes and interfaces from other files-->
+
+    <!--Paste the style code below in your project -->
+    <style>
+        .division {
+            float: left;
+        }
+
+        section:after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+    </style>
+
+    <title>Ray tracing</title>
+</head>
+
+<body>
+    <section>
+        <div style="float:left">
+            <!--All the rendering happens in a canvas. It is hooked to View.ts. In Typescript we will create a rendering context from this canvas that supports WebGL-->
+            <canvas id="glCanvas" width="400" height="400">
+                Please use a browser that supports "canvas"
+            </canvas>
+        </div>
+        <div style="float:left">
+            <!-- This is the ray tracing canvas. It is hooked to RTView.ts-->
+            <canvas id="raytraceCanvas" width="400" height="400">
+                Please use a browser that supports "canvas"
+            </canvas>
+            <input type="button" id="savebutton" value="Save to result.png" />
+        </div>
+    </section>
+
+    <script src="out/SGRaytracer.js"></script>
+</body>
+
+</html>

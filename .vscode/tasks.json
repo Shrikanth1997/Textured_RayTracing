@@ -1,0 +1,55 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558 
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        { //this task is for normal building (transpiling) of Typescript
+            "type": "typescript", //type of task
+            "tsconfig": "tsconfig.json", //which config file to use for this task
+            "option": "watch", //this task remains alive, saving file triggers it automatically
+            "problemMatcher": [ //pipe the output text of this task to this program
+                "$tsc-watch" //which will parse it and generate output (e.g. color coding)
+            ],
+            "group": {
+                "kind": "build", //this task refers to building the project
+                "isDefault": true //this is the default task (Terminal -> Run Build Task will run this)
+            }
+        },
+        { //this task is for building project with webpack and Typescript
+            "label": "Build project using webpack in development mode", //this is displayed in list of tasks 
+            "type": "shell", //this is supposed to be run in a shell, will show in Terminal below
+            "command": "webpack", //this is the actual command to be run on the terminal
+            "args": [ //command-line arguments for the above command
+                "--stats-modules", //display which modules are being processed
+                "--mode=development",
+                "--progress" //display progress (per-file)
+            ],
+            "problemMatcher": [ //pipe the output text of this task to this program
+                "$tsc-watch" //which will parse it and generate output (e.g. color coding)
+            ],
+            "isBackground": true, //run this task in background so that I can continue to work
+            "group": {
+                "kind": "build", //this task refers to building the project
+                "isDefault": true //this is the task that is run by default (overrides previous one)
+            }
+        },
+        { //this task is for building project with webpack and Typescript
+            "label": "Build project using webpack in production mode", //this is displayed in list of tasks 
+            "type": "shell", //this is supposed to be run in a shell, will show in Terminal below
+            "command": "webpack", //this is the actual command to be run on the terminal
+            "args": [ //command-line arguments for the above command
+                "--stats-modules", //display which modules are being processed
+                "--mode=production",
+                "--progress" //display progress (per-file)
+            ],
+            "problemMatcher": [ //pipe the output text of this task to this program
+                "$tsc-watch" //which will parse it and generate output (e.g. color coding)
+            ],
+            "isBackground": true, //run this task in background so that I can continue to work
+            "group": {
+                "kind": "build", //this task refers to building the project
+                "isDefault": true //this is the task that is run by default (overrides previous one)
+            }
+        }
+    ]
+}

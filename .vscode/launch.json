@@ -1,0 +1,29 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch SGRaytracer.html", //name of the launch task
+            "type": "chrome", //launch using chrome browser
+            "request": "launch", //this requests the chrome browser to launch itself
+            "sourceMaps": true, //browser will respond to breakpoints in code
+            "file": "${workspaceFolder}/SGRaytracer.html", //this is the file to launch
+            "sourceMapPathOverrides": { // when using webpack it changes source maps, look at the                                // bundled file webpack creates.
+                "webpack:///*": "${workspaceFolder}/*" //replace webpack:/// with direct folder
+            }
+        },
+        { //to run this launcher, you must first start the http server so it listens to port 8080
+            "name": "Launch SGRaytracer.html on local http server", //name of the launch task
+            "type": "chrome", //launch using chrome browser
+            "request": "launch", //this requests the chrome browser to launch itself
+            "sourceMaps": true, //browser will respond to breakpoints in code
+            "webRoot": "${workspaceFolder}",
+            "url": "http://localhost:8080/SGRaytracer.html", //this is the file to launch
+            "sourceMapPathOverrides": { // when using webpack it changes source maps, look at the //                               // bundled file webpack creates.
+                "webpack:///*": "${workspaceFolder}/*" //replace webpack:/// with direct folder
+            }
+        },
+    ]
+}
