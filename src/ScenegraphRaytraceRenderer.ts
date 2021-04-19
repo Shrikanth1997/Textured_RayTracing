@@ -158,8 +158,12 @@ export class ScenegraphRaytraceRenderer implements ScenegraphRenderer {
             let shadowHit: HitRecord;
             // Create Shadow Ray and call rayCast
             let offset: vec4 = vec4.create();
+            let offset_2: vec4 = vec4.create();
             offset = vec4.scale(offset, lightVec_noNorm, 0.01);
+            let normalView: vec4 = vec4.normalize(vec4.create(), normal);
+            offset_2 = vec4.scale(offset_2, normalView, 0.01);
             let shadowRay: Ray = new Ray();
+            //shadowRay.start = vec4.fromValues(point[0]+offset[0]+offset_2[0], point[1]+offset[1]+offset_2[1], point[2]+offset[2]+offset_2[2], 1);
             shadowRay.start = vec4.fromValues(point[0]+offset[0], point[1]+offset[1], point[2]+offset[2], 1);
             shadowRay.direction = vec4.fromValues(lightVec_noNorm[0], lightVec_noNorm[1], lightVec_noNorm[2], 0);
 
@@ -170,7 +174,8 @@ export class ScenegraphRaytraceRenderer implements ScenegraphRenderer {
             {
                 if (shadowHit.time > 0 && shadowHit.time < 1)
                 {
-                    color = vec3.add(color, color, [0, 0, 0]);
+                    let ambient: vec3 = vec3.mul(vec3.create(), material.getAmbient(), lights[i].getAmbient());
+                    color = vec3.add(color, color, ambient);
                     continue;
                 }
             }
