@@ -135,7 +135,7 @@ export class LeafNode extends SGNode {
 
             return [s,t,0,1];
         }
-        else if(vec4.equals(face,[1,0,0,0])){
+        else if(vec4.equals(face,[0,0,-1,0])){
             //console.log("Back");
             /*s = 0.5 - normal[0];
             t = normal[1] + 0.5;*/

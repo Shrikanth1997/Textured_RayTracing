@@ -79,7 +79,6 @@ export class ScenegraphRaytraceRenderer implements ScenegraphRenderer {
             let lights: Light[] = root.getLights(modelView);
             let rayView: Ray = new Ray();
 
-
             rayView.start = vec4.fromValues(0, 0, 0, 1);
             for (let i: number = 0; i < this.height; i++) {
                 for (let j = 0; j < this.width; j++) {
@@ -101,9 +100,11 @@ export class ScenegraphRaytraceRenderer implements ScenegraphRenderer {
                         -0.5 * this.height / Math.tan(glMatrix.toRadian(0.5 * this.FOV)),
                         0.0);
 
-                    let hitR: HitRecord;
-                    hitR = this.raycast(rayView, root, modelView);
-                    let color: vec4 = this.getRaytracedColor(hitR, lights, modelView);
+                    
+                
+                    let color: vec4 = this.raycast(rayView, root, modelView, lights, 5);
+
+
                     for (let k: number = 0; k < 3; k++) {
                         this.imageData[4 * (i * this.width + j) + k] = color[k];
                     }
@@ -114,8 +115,34 @@ export class ScenegraphRaytraceRenderer implements ScenegraphRenderer {
         });
     }
 
-    private raycast(rayView: Ray, root: SGNode, modelview: Stack<mat4>): HitRecord {
-        return root.intersect(rayView, modelview);
+    private reflect(v: vec4, n: vec4): vec4 {    
+        return vec4.subtract(vec4.create(), v , vec4.scale(vec4.create(), n, 2*vec4.dot(v,n)));
+    }
+
+    private raycast(rayView: Ray, root: SGNode, modelview: Stack<mat4>, lights: Light[],  bounce: number): vec4 {
+        if(bounce<0)
+            return this.background;
+
+        let hitR: HitRecord;
+        hitR = root.intersect(rayView, modelview);
+        let color: vec4 = this.getRaytracedColor(hitR, lights, modelview);
+        let colorReflect: vec4 = vec4.fromValues(0,0,0,1);
+
+        if(hitR.intersected()){
+            let ref: vec4 = this.reflect(hitR.point, hitR.normal);
+            let offset: vec4 = vec4.scale(vec4.create(), ref, 0.001);
+
+            let rayReflect: Ray = new Ray();
+            rayReflect.start = vec4.add(vec4.create(), hitR.point, offset);
+            rayReflect.direction = ref;
+
+            colorReflect = this.raycast(rayReflect, root, modelview, lights, bounce-1);
+
+            color = vec4.add(vec4.create(), vec4.scale(vec4.create(),color, hitR.material.getAbsorption()), vec4.scale(vec4.create(),colorReflect, hitR.material.getReflection()))
+        }
+
+        return color;
+        
     }
 
     private getRaytracedColor(hitRecord: HitRecord, lights: Light[], modelView: Stack<mat4>): vec4 {
@@ -167,7 +194,8 @@ export class ScenegraphRaytraceRenderer implements ScenegraphRenderer {
             shadowRay.start = vec4.fromValues(point[0]+offset[0], point[1]+offset[1], point[2]+offset[2], 1);
             shadowRay.direction = vec4.fromValues(lightVec_noNorm[0], lightVec_noNorm[1], lightVec_noNorm[2], 0);
 
-            shadowHit = this.raycast(shadowRay, root, modelView);
+            shadowHit = root.intersect(shadowRay, modelView);
+            //shadowHit = this.raycast(shadowRay, root, modelView, lights, 5);
 
             // if the shadow hits any object and time is within 0 and 1, we move onto next light
             if (shadowHit.intersected())

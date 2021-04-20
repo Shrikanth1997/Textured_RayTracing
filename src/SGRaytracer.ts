@@ -642,8 +642,8 @@ function createScene_2(): string{
             0.5
           ],
           "position": [
-            100.0,
-            100.0,
+            300.0,
+            300.0,
             0.0,
             1.0
           ],
@@ -706,8 +706,8 @@ function createScene_2(): string{
                           1.0
                       ],
                   "shininess": 100.0,
-                  "absorption": 1.0,
-                  "reflection": 0.0,
+                  "absorption": 0.5,
+                  "reflection": 0.5,
                   "transparency": 0.0,
                   "refractive_index": 0.0
                   }
@@ -727,7 +727,7 @@ function createScene_2(): string{
                       "scale": [
                           1000,
                           500,
-                          500
+                          1200
                       ]
                   }
               ],
@@ -775,7 +775,7 @@ function createScene_2(): string{
                   {
                       "translate": [
                         80.0,
-                        -50.0,
+                        -10.0,
                         200.0
                       ]
                   },
@@ -845,7 +845,7 @@ function createScene_2(): string{
                   },
                   {
                       "rotate": [
-                          -20,
+                          20,
                           1.0,
                           0.0,
                           0.0
@@ -882,8 +882,8 @@ function createScene_2(): string{
                           1.0
                       ],
                   "shininess": 100.0,
-                  "absorption": 1.0,
-                  "reflection": 0.0,
+                  "absorption": 0.4,
+                  "reflection": 0.6,
                   "transparency": 0.0,
                   "refractive_index": 0.0
                   }
@@ -1913,5 +1913,398 @@ function face(): string {
 
     `;
 }
+
+
+function createScene_3(): string{
+
+  return `
+  {
+  "scaleinstances": "false",
+  "instances": [
+      {
+      "name": "sphere",
+      "path": "models/sphere.obj"
+      },
+      {
+      "name": "box",
+      "path": "models/box.obj"
+      },
+      {
+      "name": "cylinder",
+      "path": "models/cylinder.obj"
+      },
+      {
+      "name": "cone",
+      "path": "models/cone.obj"
+      }
+  ],
+  "images": [
+      {
+      "name": "white",
+      "path": "textures/white.png"
+      }
+  ],
+  "root": {
+      "type": "group",
+      "name": "Root of scene graph",
+      "lights": [
+        {
+          "ambient": [
+            0.8,
+            0.8,
+            0.8
+          ],
+          "diffuse": [
+            0.8,
+            0.8,
+            0.8
+          ],
+          "specular": [
+            0.8,
+            0.8,
+            0.8
+          ],
+          "position": [
+            0.0,
+            100.0,
+            0.0,
+            1.0
+          ],
+          "spotdirection": [
+            0.0,
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "spotcutoff": 60
+        },
+        {
+          "ambient": [
+            0.2,
+            0.2,
+            0.2
+          ],
+          "diffuse": [
+            0.2,
+            0.2,
+            0.2
+          ],
+          "specular": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "position": [
+            100.0,
+            100.0,
+            0.0,
+            1.0
+          ],
+          "spotdirection": [
+              0.0,
+              -1.0,
+              0.0,
+              0.0
+            ],
+            "spotcutoff": 60
+        }
+      ],
+      "children": [
+          {
+              "type": "transform",
+              "transform": [
+                  {
+                      "translate": [
+                        0.0,
+                        0.0,
+                        30.0
+                      ]
+                  },
+                  {
+                      "scale": [
+                          15.0,
+                          15.0,
+                          15.0
+                      ]
+                  }
+              ],
+              "child": {
+                  "type": "object",
+                  "instanceof": "sphere",
+                  "material": {
+                      "ambient": [
+                          0.4,
+                          0.4,
+                          0.4,
+                          1.0
+                      ],
+                      "diffuse": [
+                          0.8,
+                          0.8,
+                          0.8,
+                          1.0
+                      ],
+                      "specular": [
+                          0.8,
+                          0.8,
+                          0.8,
+                          1.0
+                      ],
+                      "emission": [
+                          0.0,
+                          0.0,
+                          0.0,
+                          1.0
+                      ],
+                  "shininess": 100.0,
+                  "absorption": 0.3,
+                  "reflection": 0.7,
+                  "transparency": 0.0,
+                  "refractive_index": 0.0
+                  }
+              }
+          },
+          {
+              "type": "transform",
+              "transform": [
+                  {
+                      "translate": [
+                        0.0,
+                        -40.0,
+                        15.0
+                      ]
+                  },
+                  {
+                      "scale": [
+                          50,
+                          40,
+                          40
+                      ]
+                  }
+              ],
+              "child": {
+                  "type": "object",
+                  "instanceof": "box",
+                  "texture" : "white",
+                  "material": {
+                      "ambient": [
+                          0.8,
+                          0.2,
+                          0.3,
+                          1.0
+                      ],
+                      "diffuse": [
+                          0.8,
+                          0.8,
+                          0.8,
+                          1.0
+                      ],
+                      "specular": [
+                          0.8,
+                          0.8,
+                          0.8,
+                          1.0
+                      ],
+                      "emission": [
+                          0.0,
+                          0.0,
+                          0.0,
+                          1.0
+                      ],
+                  "shininess": 100.0,
+                  "absorption": 1.0,
+                  "reflection": 0.0,
+                  "transparency": 0.0,
+                  "refractive_index": 0.0
+                  }
+              }
+          },
+
+
+          {
+              "type": "transform",
+              "transform": [
+                  {
+                      "translate": [
+                        -10.0,
+                        -5,
+                        10.0
+                      ]
+                  },
+                  {
+                      "scale": [
+                          10,
+                          10,
+                          10
+                      ]
+                  },
+                  {
+                      "rotate": [
+                          -10,
+                          1.0,
+                          0.0,
+                          0.0
+                      ]
+                  }
+              ],
+              "child": {
+                  "type": "object",
+                  "instanceof": "box",
+                  "texture" : "white",
+                  "material": {
+                      "ambient": [
+                          0.8,
+                          0.8,
+                          0.3,
+                          1.0
+                      ],
+                      "diffuse": [
+                          0.8,
+                          0.8,
+                          0.8,
+                          1.0
+                      ],
+                      "specular": [
+                          0.8,
+                          0.8,
+                          0.8,
+                          1.0
+                      ],
+                      "emission": [
+                          0.0,
+                          0.0,
+                          0.0,
+                          1.0
+                      ],
+                  "shininess": 100.0,
+                  "absorption": 1.0,
+                  "reflection": 0.0,
+                  "transparency": 0.0,
+                  "refractive_index": 0.0
+                  }
+              }
+          },
+
+
+          {
+              "type": "transform",
+              "transform": [
+                  {
+                      "translate": [
+                        10.0,
+                        -15,
+                        10.0
+                      ]
+                  },
+                  {
+                      "scale": [
+                          3,
+                          3,
+                          3
+                      ]
+                  }
+              ],
+              "child": {
+                  "type": "object",
+                  "instanceof": "sphere",
+                  "texture" : "white",
+                  "material": {
+                      "ambient": [
+                          0.2,
+                          0.8,
+                          0.2,
+                          1.0
+                      ],
+                      "diffuse": [
+                          0.8,
+                          0.8,
+                          0.8,
+                          1.0
+                      ],
+                      "specular": [
+                          0.8,
+                          0.8,
+                          0.8,
+                          1.0
+                      ],
+                      "emission": [
+                          0.0,
+                          0.0,
+                          0.0,
+                          1.0
+                      ],
+                  "shininess": 100.0,
+                  "absorption": 1.0,
+                  "reflection": 0.0,
+                  "transparency": 0.0,
+                  "refractive_index": 0.0
+                  }
+              }
+          },
+
+
+          {
+              "type": "transform",
+              "transform": [
+                  {
+                      "translate": [
+                        7.5,
+                        7.5,
+                        -15.0
+                      ]
+                  },
+                  {
+                      "scale": [
+                          5,
+                          5,
+                          5
+                      ]
+                  }
+              ],
+              "child": {
+                  "type": "object",
+                  "instanceof": "box",
+                  "texture" : "white",
+                  "material": {
+                      "ambient": [
+                          0.7,
+                          0.7,
+                          0.7,
+                          1.0
+                      ],
+                      "diffuse": [
+                          0.8,
+                          0.8,
+                          0.8,
+                          1.0
+                      ],
+                      "specular": [
+                          0.8,
+                          0.8,
+                          0.8,
+                          1.0
+                      ],
+                      "emission": [
+                          0.0,
+                          0.0,
+                          0.0,
+                          1.0
+                      ],
+                  "shininess": 100.0,
+                  "absorption": 1.0,
+                  "reflection": 0.0,
+                  "transparency": 0.0,
+                  "refractive_index": 0.0
+                  }
+              }
+          }
+      ]
+  }
+}
+`;
+
+}
+
+
 
 main();
