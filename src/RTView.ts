@@ -1,5 +1,4 @@
 import { Scenegraph } from "./Scenegraph";
-
 import { IVertexData } from "%COMMON/IVertexData";
 import { Stack } from "%COMMON/Stack";
 import { mat4, vec3, vec4 } from "gl-matrix";
@@ -50,7 +49,7 @@ export class RTView {
         let modelview: Stack<mat4> = new Stack<mat4>();
 
         modelview.push(mat4.create());
-        mat4.lookAt(modelview.peek(), vec3.fromValues(0, 0, -50), vec3.fromValues(0, 0, 0), vec3.fromValues(0, 1, 0));
+        mat4.lookAt(modelview.peek(), vec3.fromValues(0, 300, 500), vec3.fromValues(0, 0, 0), vec3.fromValues(0, 1, 0));
 
         this.renderer.draw(modelview).then(() => {
             let data: number[] = this.renderer.getImage();

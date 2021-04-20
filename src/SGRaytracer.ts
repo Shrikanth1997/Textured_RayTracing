@@ -36,7 +36,7 @@ function main(): void {
             return;
         }
         console.log("Window loaded");
-        view = new View(gl, 120, vec4.fromValues(0.9, 0.9, 0.7, 1));
+        view = new View(gl, 60, vec4.fromValues(0.9, 0.9, 0.7, 1));
 
 
 
@@ -46,7 +46,7 @@ function main(): void {
             vec4.fromValues(0.9, 0.9, 0.7, 1));
 
 
-        ScenegraphJSONImporter.importJSON(new VertexPNTProducer(), createScene())
+        ScenegraphJSONImporter.importJSON(new VertexPNTProducer(), createScene_2())
             .then((s: Scenegraph<VertexPNT>) => {
                 view.initScenegraph(s);
 
@@ -167,14 +167,6 @@ function createSphere(): string{
                           100.0,
                           100.0
                       ]
-                  },
-                  {
-                    "rotate": [
-                      20.0,
-                      0.0,
-                      1.0,
-                      0.0
-                  ]
                   }
               ],
               "child": {
@@ -580,6 +572,22 @@ function createScene_2(): string{
       {
       "name": "white",
       "path": "textures/white.png"
+      },
+      {
+        "name": "earth",
+        "path": "textures/earthmap.png"
+      },
+      {
+        "name": "dice",
+        "path": "textures/die.png"
+      },
+      {
+        "name": "checkerboard",
+        "path": "textures/checkerboard-box.png"
+      },
+      {
+        "name": "mirror",
+        "path": "textures/mirror.png"
       }
   ],
   "root": {
@@ -604,7 +612,7 @@ function createScene_2(): string{
           ],
           "position": [
             0.0,
-            100.0,
+            500.0,
             0.0,
             1.0
           ],
@@ -656,25 +664,81 @@ function createScene_2(): string{
                   {
                       "translate": [
                         0.0,
-                        0.0,
-                        30.0
+                        100.0,
+                        -100.0
                       ]
                   },
                   {
                       "scale": [
-                          90.0,
-                          90.0,
-                          90.0
+                          150.0,
+                          150.0,
+                          150.0
                       ]
                   }
               ],
               "child": {
                   "type": "object",
                   "instanceof": "sphere",
+                  "texture": "mirror",
                   "material": {
                       "ambient": [
                           0.4,
-                          0.2,
+                          0.4,
+                          0.4,
+                          1.0
+                      ],
+                      "diffuse": [
+                          0.8,
+                          0.8,
+                          0.8,
+                          1.0
+                      ],
+                      "specular": [
+                          0.8,
+                          0.8,
+                          0.8,
+                          1.0
+                      ],
+                      "emission": [
+                          0.0,
+                          0.0,
+                          0.0,
+                          1.0
+                      ],
+                  "shininess": 100.0,
+                  "absorption": 1.0,
+                  "reflection": 0.0,
+                  "transparency": 0.0,
+                  "refractive_index": 0.0
+                  }
+              }
+          },
+          {
+              "type": "transform",
+              "transform": [
+                  {
+                      "translate": [
+                        0.0,
+                        -500.0,
+                        0.0
+                      ]
+                  },
+                  {
+                      "scale": [
+                          1000,
+                          500,
+                          500
+                      ]
+                  }
+              ],
+              "child": {
+                  "type": "object",
+                  "instanceof": "box",
+                  "texture" : "checkerboard",
+                  "material": {
+                      "ambient": [
+                          0.6,
+                          0.6,
                           0.6,
                           1.0
                       ],
@@ -704,88 +768,34 @@ function createScene_2(): string{
                   }
               }
           },
-          {
-              "type": "transform",
-              "transform": [
-                  {
-                      "translate": [
-                        0.0,
-                        -40.0,
-                        15.0
-                      ]
-                  },
-                  {
-                      "scale": [
-                          300,
-                          240,
-                          240
-                      ]
-                  }
-              ],
-              "child": {
-                  "type": "object",
-                  "instanceof": "box",
-                  "texture" : "white",
-                  "material": {
-                      "ambient": [
-                          0.8,
-                          0.2,
-                          0.3,
-                          1.0
-                      ],
-                      "diffuse": [
-                          0.8,
-                          0.8,
-                          0.8,
-                          1.0
-                      ],
-                      "specular": [
-                          0.8,
-                          0.8,
-                          0.8,
-                          1.0
-                      ],
-                      "emission": [
-                          0.0,
-                          0.0,
-                          0.0,
-                          1.0
-                      ],
-                  "shininess": 100.0,
-                  "absorption": 1.0,
-                  "reflection": 0.0,
-                  "transparency": 0.0,
-                  "refractive_index": 0.0
-                  }
-              }
-          },
 
           {
               "type": "transform",
               "transform": [
                   {
                       "translate": [
-                        -10.0,
-                        -10.0,
-                        -10.0
+                        80.0,
+                        -50.0,
+                        200.0
                       ]
                   },
                   {
                       "scale": [
-                          30.0,
-                          30.0,
-                          30.0
+                          50.0,
+                          50.0,
+                          50.0
                       ]
                   }
               ],
               "child": {
                   "type": "object",
                   "instanceof": "sphere",
+                  "texture": "earth",
                   "material": {
                       "ambient": [
-                          0.1,
-                          0.8,
-                          0.8,
+                          0.7,
+                          0.7,
+                          0.7,
                           1.0
                       ],
                       "diffuse": [
@@ -821,21 +831,21 @@ function createScene_2(): string{
               "transform": [
                   {
                       "translate": [
-                        -10.0,
-                        -5,
-                        10.0
+                        100.0,
+                        50,
+                        100.0
                       ]
                   },
                   {
                       "scale": [
-                          60,
-                          60,
-                          60
+                          100,
+                          100,
+                          100
                       ]
                   },
                   {
                       "rotate": [
-                          -10,
+                          -20,
                           1.0,
                           0.0,
                           0.0
@@ -886,16 +896,16 @@ function createScene_2(): string{
               "transform": [
                   {
                       "translate": [
-                        10.0,
-                        -15,
-                        10.0
+                        -100.0,
+                        50,
+                        200.0
                       ]
                   },
                   {
                       "scale": [
-                          20,
-                          20,
-                          20
+                          30,
+                          30,
+                          30
                       ]
                   }
               ],
@@ -943,9 +953,9 @@ function createScene_2(): string{
               "transform": [
                   {
                       "translate": [
-                        7.5,
-                        7.5,
-                        -15.0
+                        -80,
+                        200,
+                        200.0
                       ]
                   },
                   {
@@ -959,7 +969,7 @@ function createScene_2(): string{
               "child": {
                   "type": "object",
                   "instanceof": "box",
-                  "texture" : "white",
+                  "texture" : "checkerboard",
                   "material": {
                       "ambient": [
                           0.7,

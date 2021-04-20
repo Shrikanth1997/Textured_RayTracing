@@ -102,7 +102,7 @@ export class View {
      * Right now this matrix is identity, which means "no transformations"
      */
     this.modelview.push(mat4.create());
-    mat4.lookAt(this.modelview.peek(), vec3.fromValues(-50, 120, 200), vec3.fromValues(0, 0, 0), vec3.fromValues(0, 1, 0));
+    mat4.lookAt(this.modelview.peek(), vec3.fromValues(0, 300, 500), vec3.fromValues(0, 0, 0), vec3.fromValues(0, 1, 0));
 
 
     this.gl.uniformMatrix4fv(this.shaderLocations.getUniformLocation("projection"), false, this.proj);
