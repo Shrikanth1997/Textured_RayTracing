@@ -102,7 +102,7 @@ export class ScenegraphRaytraceRenderer implements ScenegraphRenderer {
 
                     
                 
-                    let color: vec4 = this.raycast(rayView, root, modelView, lights, 5);
+                    let color: vec4 = this.raycast(rayView, root, modelView, lights, 0);
 
 
                     for (let k: number = 0; k < 3; k++) {
@@ -119,7 +119,7 @@ export class ScenegraphRaytraceRenderer implements ScenegraphRenderer {
         return vec4.subtract(vec4.create(), v , vec4.scale(vec4.create(), n, 2*vec4.dot(v,n)));
     }
 
-    private raycast(rayView: Ray, root: SGNode, modelview: Stack<mat4>, lights: Light[],  bounce: number): vec4 {
+    /*private raycast(rayView: Ray, root: SGNode, modelview: Stack<mat4>, lights: Light[],  bounce: number): vec4 {
         if(bounce<0)
             return this.background;
 
@@ -141,8 +141,50 @@ export class ScenegraphRaytraceRenderer implements ScenegraphRenderer {
             color = vec4.add(vec4.create(), vec4.scale(vec4.create(),color, hitR.material.getAbsorption()), vec4.scale(vec4.create(),colorReflect, hitR.material.getReflection()))
         }
 
+        return color;  
+    }*/
+
+
+    private raycast(rayView: Ray, root: SGNode, modelview: Stack<mat4>, lights: Light[], depth: number): vec4 {
+        if(depth > 5)
+            return this.background;
+
+        let hitR: HitRecord;
+        hitR = root.intersect(rayView, modelview);
+        let color: vec4 = this.getRaytracedColor(hitR, lights, modelview);
+        let refColor:vec4 = vec4.fromValues(0, 0, 0, 1);
+
+        // Spawn a reflection ray if there is a valid intersection
+        if(hitR.intersected())
+        {
+            let a: number = hitR.material.getAbsorption();
+            let r: number = hitR.material.getReflection();
+
+            // If reflection factor is 0, avoid tracing reflection rays and compute only color due to absorption
+            if(r != 0)
+            {
+                let incident: vec4 = vec4.normalize(vec4.create(), vec4.fromValues(hitR.point[0], hitR.point[1], hitR.point[2], 0));
+                let normal: vec4 = vec4.normalize(vec4.create(), vec4.fromValues(hitR.normal[0], hitR.normal[1], hitR.normal[2], 0));
+                let nDotI: number = vec4.dot(incident, normal);
+                //let reflecVec: vec4 = vec4.subtract(vec4.create(), vec4.scale(vec4.create(), normal, 2 * nDotI), incident);
+                let reflecVec: vec4 = this.reflect(incident, normal);
+                let offset: vec4 = vec4.create();
+                offset = vec4.scale(offset, reflecVec, 0.01);
+
+                let refRay: Ray = new Ray();
+                refRay.start = vec4.fromValues(hitR.point[0]+offset[0], hitR.point[1]+offset[1], hitR.point[2]+offset[2], 1);
+                refRay.direction = vec4.fromValues(reflecVec[0], reflecVec[1], reflecVec[2], 0);
+                refColor = this.raycast(refRay, root, modelview, lights, depth+1)
+                // Combine shade color and reflection color
+                color = vec4.add(color, vec4.scale(vec4.create(), color, a), vec4.scale(vec4.create(), refColor, r));
+            }
+            else
+            {
+                color = vec4.scale(vec4.create(), color, a);
+            }
+        }
+
         return color;
-        
     }
 
     private getRaytracedColor(hitRecord: HitRecord, lights: Light[], modelView: Stack<mat4>): vec4 {
