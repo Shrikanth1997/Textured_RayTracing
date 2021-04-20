@@ -36,7 +36,7 @@ function main(): void {
             return;
         }
         console.log("Window loaded");
-        view = new View(gl, 120, vec4.fromValues(0.9, 0.9, 0.7, 1));
+        view = new View(gl, 60, vec4.fromValues(0.9, 0.9, 0.7, 1));
 
 
 
@@ -46,7 +46,7 @@ function main(): void {
             vec4.fromValues(0.9, 0.9, 0.7, 1));
 
 
-        ScenegraphJSONImporter.importJSON(new VertexPNTProducer(), createScene())
+        ScenegraphJSONImporter.importJSON(new VertexPNTProducer(), createSphere_2())
             .then((s: Scenegraph<VertexPNT>) => {
                 view.initScenegraph(s);
 
@@ -553,7 +553,7 @@ function createScene(): string{
 
 
 
-function createScene_2(): string{
+function createSphere_2(): string{
 
   return `
   {
@@ -616,7 +616,6 @@ function createScene_2(): string{
           ],
           "spotcutoff": 60
         },
-
         {
           "ambient": [
             0.2,
@@ -647,7 +646,6 @@ function createScene_2(): string{
             ],
             "spotcutoff": 60
         }
-        
       ],
       "children": [
           {
@@ -662,9 +660,9 @@ function createScene_2(): string{
                   },
                   {
                       "scale": [
-                          90.0,
-                          90.0,
-                          90.0
+                          15.0,
+                          15.0,
+                          15.0
                       ]
                   }
               ],
@@ -697,8 +695,8 @@ function createScene_2(): string{
                           1.0
                       ],
                   "shininess": 100.0,
-                  "absorption": 1.0,
-                  "reflection": 0.0,
+                  "absorption": 0.3,
+                  "reflection": 0.7,
                   "transparency": 0.0,
                   "refractive_index": 0.0
                   }
@@ -716,9 +714,9 @@ function createScene_2(): string{
                   },
                   {
                       "scale": [
-                          300,
-                          240,
-                          240
+                          50,
+                          40,
+                          40
                       ]
                   }
               ],
@@ -731,61 +729,6 @@ function createScene_2(): string{
                           0.8,
                           0.2,
                           0.3,
-                          1.0
-                      ],
-                      "diffuse": [
-                          0.8,
-                          0.8,
-                          0.8,
-                          1.0
-                      ],
-                      "specular": [
-                          0.8,
-                          0.8,
-                          0.8,
-                          1.0
-                      ],
-                      "emission": [
-                          0.0,
-                          0.0,
-                          0.0,
-                          1.0
-                      ],
-                  "shininess": 100.0,
-                  "absorption": 1.0,
-                  "reflection": 0.0,
-                  "transparency": 0.0,
-                  "refractive_index": 0.0
-                  }
-              }
-          },
-
-          {
-              "type": "transform",
-              "transform": [
-                  {
-                      "translate": [
-                        -10.0,
-                        -10.0,
-                        -10.0
-                      ]
-                  },
-                  {
-                      "scale": [
-                          30.0,
-                          30.0,
-                          30.0
-                      ]
-                  }
-              ],
-              "child": {
-                  "type": "object",
-                  "instanceof": "sphere",
-                  "material": {
-                      "ambient": [
-                          0.1,
-                          0.8,
-                          0.8,
                           1.0
                       ],
                       "diffuse": [
@@ -828,9 +771,9 @@ function createScene_2(): string{
                   },
                   {
                       "scale": [
-                          60,
-                          60,
-                          60
+                          10,
+                          10,
+                          10
                       ]
                   },
                   {
@@ -893,9 +836,9 @@ function createScene_2(): string{
                   },
                   {
                       "scale": [
-                          20,
-                          20,
-                          20
+                          3,
+                          3,
+                          3
                       ]
                   }
               ],
@@ -950,9 +893,9 @@ function createScene_2(): string{
                   },
                   {
                       "scale": [
-                          30,
-                          30,
-                          30
+                          5,
+                          5,
+                          5
                       ]
                   }
               ],
@@ -999,8 +942,6 @@ function createScene_2(): string{
 `;
 
 }
-
-
 
 
 
